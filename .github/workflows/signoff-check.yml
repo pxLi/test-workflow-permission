@@ -28,7 +28,7 @@ on:
         required: true
         type: string
     secrets:
-      github_token:
+      token:
         required: true
 
 jobs:
@@ -42,5 +42,5 @@ jobs:
         env:
           OWNER: ${{ inputs.owner }}
           REPO_NAME: ${{ inputs.repo_name }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_NUMBER: ${{ inputs.string }}
+          GITHUB_TOKEN: ${{ secrets.token }}
+          PULL_NUMBER: ${{ inputs.pull_number }}
