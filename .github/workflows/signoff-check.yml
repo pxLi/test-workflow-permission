@@ -21,7 +21,7 @@ on:
       owner:
         required: true
         type: string
-      repo_name:
+      repo:
         required: true
         type: string
       pull_number:
@@ -41,6 +41,6 @@ jobs:
         uses: ./.github/workflows/signoff-check
         env:
           OWNER: ${{ inputs.owner }}
-          REPO_NAME: ${{ inputs.repo_name }}
+          REPO_NAME: ${{ inputs.repo }}
           GITHUB_TOKEN: ${{ secrets.token }}
           PULL_NUMBER: ${{ inputs.pull_number }}
