@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2024, NVIDIA CORPORATION.
+# Copyright (c) 2024, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,20 @@
 name: signoff check
 
 on:
-  pull_request_target:
-    types: [opened, synchronize, reopened]
+  workflow_call:
+    inputs:
+      owner:
+        required: true
+        type: string
+      repo_name:
+        required: true
+        type: string
+      pull_number:
+        required: true
+        type: string
+    secrets:
+      github_token:
+        required: true
 
 jobs:
   signoff-check:
@@ -25,10 +37,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: sigoff-check job
+      - name: signoff-check job
         uses: ./.github/workflows/signoff-check
         env:
-          OWNER: NVIDIA
-          REPO_NAME: spark-rapids
+          OWNER: ${{ inputs.owner }}
+          REPO_NAME: ${{ inputs.repo_name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_NUMBER: ${{ github.event.number }}
+          PULL_NUMBER: ${{ inputs.string }}
