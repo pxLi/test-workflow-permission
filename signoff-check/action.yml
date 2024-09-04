@@ -48,7 +48,7 @@ runs:
         ls -ltr
         ls -ltr test-workflow-permission/ test-workflow-permission/signoff-check/
         pwd
-        docker build -t signoff-check test-workflow-permission/signoff-check/Dockerfile
+        docker build -t signoff-check -f test-workflow-permission/signoff-check/Dockerfile .
         docker run --rm \
           -e OWNER="${{ inputs.owner }}" \
           -e REPO_NAME="${{ inputs.repo }}" \
