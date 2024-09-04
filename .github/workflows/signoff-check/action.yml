@@ -12,8 +12,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'signoff check action'
-description: 'check if PR got signed off'
+name: "Signoff Check"
+description: "A composite action to check if a PR got sign-off using a Docker container"
+inputs:
+  owner:
+    description: "Repository Owner"
+    required: true
+    type: string
+  repo:
+    description: "Repository name"
+    required: true
+    type: string
+  pull_number:
+    description: "Pull request number"
+    required: true
+    type: string
+  token:
+    description: "GitHub token"
+    required: true
+    type: string
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build Docker Image
+      run: |
+        docker build -t signoff-check .github/workflows/signoff-check/Dockerfile
+
+    - name: Run Signoff Check in Docker
+      run: |
+        docker run --rm \
+          -e OWNER="${{ inputs.owner }}" \
+          -e REPO_NAME="${{ inputs.repo }}" \
+          -e GITHUB_TOKEN="${{ inputs.token }}" \
+          -e PULL_NUMBER="${{ inputs.pull_number }}" \
+          signoff-check
+
