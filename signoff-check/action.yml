@@ -40,15 +40,12 @@ runs:
       with:
         repository: pxLi/test-workflow-permission
         ref: main
-        path: test-workflow-permission
 
     - name: Run Signoff Check in Docker
       shell: bash
       run: |
-        ls -ltr
-        ls -ltr test-workflow-permission/ test-workflow-permission/signoff-check/
-        pwd
-        docker build -t signoff-check -f test-workflow-permission/signoff-check/Dockerfile .
+        pushd test-workflow-permission/signoff-check
+        docker build -t signoff-check -f /Dockerfile .
         docker run --rm \
           -e OWNER="${{ inputs.owner }}" \
           -e REPO_NAME="${{ inputs.repo }}" \
