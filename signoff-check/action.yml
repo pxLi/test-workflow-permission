@@ -38,12 +38,10 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Build Docker Image
+    - name: Run Signoff Check in Docker
+      shell: bash
       run: |
         docker build -t signoff-check .github/workflows/signoff-check/Dockerfile
-
-    - name: Run Signoff Check in Docker
-      run: |
         docker run --rm \
           -e OWNER="${{ inputs.owner }}" \
           -e REPO_NAME="${{ inputs.repo }}" \
