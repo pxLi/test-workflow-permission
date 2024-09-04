@@ -37,6 +37,9 @@ runs:
   steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        repository: pxLi/test-workflow-permission
+        ref: main
 
     - name: Run Signoff Check in Docker
       shell: bash
@@ -48,4 +51,3 @@ runs:
           -e GITHUB_TOKEN="${{ inputs.token }}" \
           -e PULL_NUMBER="${{ inputs.pull_number }}" \
           signoff-check
-
