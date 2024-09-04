@@ -44,8 +44,8 @@ runs:
     - name: Run Signoff Check in Docker
       shell: bash
       run: |
-        pushd test-workflow-permission/signoff-check
-        docker build -t signoff-check -f /Dockerfile .
+        pushd ./signoff-check
+        docker build -t signoff-check -f Dockerfile .
         docker run --rm \
           -e OWNER="${{ inputs.owner }}" \
           -e REPO_NAME="${{ inputs.repo }}" \
