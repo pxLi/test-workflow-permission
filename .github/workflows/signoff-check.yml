@@ -39,8 +39,8 @@ jobs:
 
       - name: signoff-check job
         uses: pxLi/test-workflow-permission/signoff-check@main
-        env:
-          OWNER: ${{ inputs.owner }}
-          REPO_NAME: ${{ inputs.repo }}
-          GITHUB_TOKEN: ${{ secrets.token }}
-          PULL_NUMBER: ${{ inputs.pull_number }}
+        with:
+          owner: ${{ inputs.owner }}
+          repo: ${{ inputs.repo }}
+          pull_number: ${{ inputs.pull_number }}
+          token: ${{ secrets.token }}
