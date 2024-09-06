@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: signoff-check job
-        uses: pxLi/test-workflow-permission/.github/workflows/signoff-check@main
+        uses: pxLi/test-workflow-permission/signoff-check@main
         env:
           OWNER: ${{ inputs.owner }}
           REPO_NAME: ${{ inputs.repo }}
