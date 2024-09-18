@@ -37,17 +37,18 @@ runs:
   steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Build Docker Image
-      run: |
-        docker build -t signoff-check .github/workflows/signoff-check/Dockerfile
+      with:
+        repository: pxLi/test-workflow-permission
+        ref: main
 
     - name: Run Signoff Check in Docker
+      shell: bash
       run: |
+        pushd ./signoff-check
+        docker build -t signoff-check -f Dockerfile .
         docker run --rm \
           -e OWNER="${{ inputs.owner }}" \
           -e REPO_NAME="${{ inputs.repo }}" \
           -e GITHUB_TOKEN="${{ inputs.token }}" \
           -e PULL_NUMBER="${{ inputs.pull_number }}" \
           signoff-check
-

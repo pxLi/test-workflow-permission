@@ -1,0 +1,18 @@
+name: auto-merge HEAD to BASE
+
+on:
+  pull_request_target:
+    branches:
+      - branch-*
+    types: [closed]
+
+jobs:
+  auto-merge:
+    if: github.event.pull_request.merged == true
+    uses: pxLi/spark-rapids-common/.github/workflows/auto-merge.yml@auto-merge
+    with:
+      owner: pxLi
+      repo: test-workflow-permission
+      branch: ${{ github.event.pull_request.base.ref }}
+    secrets:
+      token: ${{ secrets.AUTOMERGE_TOKEN }}
