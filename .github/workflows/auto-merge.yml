@@ -9,7 +9,7 @@ on:
 jobs:
   auto-merge:
     if: github.event.pull_request.merged == true
-    uses: pxLi/spark-rapids-common/.github/workflows/auto-merge.yml@auto-merge
+    uses: NVIDIA/spark-rapids-common/.github/workflows/auto-merge.yml@main
     with:
       owner: pxLi
       repo: test-workflow-permission
