@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: set HEAD ENV
-        run: echo "HEAD=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+        run: echo "HEAD=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
 
       - name: Generate target branch
         run: |
